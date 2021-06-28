@@ -53,13 +53,13 @@ sudo apt install bc bison build-essential ccache curl flex g++-multilib gcc-mult
 sudo apt install bc bison build-essential ccache curl flex g++-multilib gcc-multilib git gnupg gperf imagemagick lib32ncurses5-dev lib32readline-dev lib32z1-dev liblz4-tool libncurses5 libncurses5-dev libsdl1.2-dev libssl-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc zip zlib1g-dev openjdk-11-jdk git vim
 ```
 
-配置git
+設定 git
 ```
 git config --global user.email "您的e-mail"
 git config --global user.name "您的名字"
 ```
 
-同步 Android 源代碼
+同步 Android 原始碼
 ---
 #### 參考各個 Android ROM 的 Android Manifest
 ##### 本文皆以 Havoc OS（Android 10）與 ASUS ZenFone 5Z (Z01R) 進行舉例
@@ -82,16 +82,27 @@ repo init -u https://github.com/Havoc-OS/android_manifest.git -b ten
 ```
 repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
 ```
-#### 更新源代碼
-- 在這之後如果有需要更新源代碼，請使用 repo sync 進行同步（更新代碼）
+#### 更新原始碼
+- 在這之後如果有需要更新原始碼，請使用 repo sync 進行同步（更新系統原始碼）
 ```
 repo sync
 ```
-- 待所有源代碼同步完成後，還需要配置 Device Tree / Vendor Tree / Kernel Tree
+- 待所有原始碼同步完成後，還需要配置 Device Tree / Vendor Tree / Kernel Tree
 - 另外，還需要額外下載 Kernel 的編譯器
+#### GCC
 ```
 git clone --depth=1 https://github.com/arter97/arm64-gcc -b master prebuilts/gcc/linux-x86/aarch64/aarch64-elf
 git clone --depth=1 https://github.com/arter97/arm32-gcc -b master prebuilts/gcc/linux-x86/arm/arm-eabi
+```
+或是
+```
+git clone --depth=1 https://github.com/mvaisakh/gcc-arm64 -b gcc-master prebuilts/gcc/linux-x86/aarch64/aarch64-elf
+git clone --depth=1 https://github.com/mvaisakh/gcc-arm -b gcc-master prebuilts/gcc/linux-x86/arm/arm-eabi
+```
+
+#### Clang
+```
+git clone --depth=1 https://github.com/kdrag0n/proton-clang -b master prebuilts/clang/host/linux-x86/clang-proton
 ```
 
 # 修改 Device Tree / Device Common Tree
@@ -215,7 +226,7 @@ brunch havoc_Z01R-userdebug | tee havoc_Z01R_$(date +"%Y%m%d_%H.%M")GMT8.txt
 
 # 其他注意事項
 ### 編譯 ROM 是一個大工程
-- 推薦在編譯的時候使用 tmux 指令去新增一個 session 以便把當前的工作階段保留在後台
+- 推薦在編譯的時候使用 tmux 指令去新增一個 session 以便把當前的工作階段保留在背景
 - 編譯的同時建議在（ brunch 系統代號_機型代號-編譯類型）後方加上 tee 指令，方便保存log檔案，如果有遇到 FAILED 便可以找到問題來源
 - 如果要上傳檔案到雲端硬碟，推薦使用 rclone 上傳檔案
 - 需要熟悉 git 指令
@@ -241,9 +252,10 @@ brunch havoc_Z01R-userdebug | tee havoc_Z01R_$(date +"%Y%m%d_%H.%M")GMT8.txt
 
 # Q&A
 1. 編譯過程遇到 FAILED 的時候，可以嘗試去看看哪個檔案造成的，它會寫在 FAILED 的後方
-2. 如果真的遇到自己無法解決的問題，可以加入這兩個 Telegram 群組
+2. 如果真的遇到自己無法解決的問題，可以加入這三個 Telegram 群組
 [Android Building Help](https://t.me/AndroidBuildersHelp)
 [RomDevelopment](https://t.me/alaskalinuxuser_romdevelopment)
+[Android OS Building Support](https://t.me/android_builders_help)
 3. 等我想到還有什麼問題再加上來
 
 
@@ -251,12 +263,12 @@ brunch havoc_Z01R-userdebug | tee havoc_Z01R_$(date +"%Y%m%d_%H.%M")GMT8.txt
 ## 聯絡我
 - Telegram：[Edward Wu](https://t.me/edwardwu0223)
 - 行有餘力的話，可以考慮捐款給我
+[Paypal](https://www.paypal.me/edwardwu0223)
 - 同場加映
 [Android 第三方 Recovery 繁體中文編譯教學](https://hackmd.io/@EdwardWu/CompileARecovery)
 <p align="center">
 <a href="https://github.com/bluehomewu"> <img src="https://img.shields.io/badge/-Github-000?style=flat&logo=Github&logoColor=white" /></a>
 <a href="mailto:bluehome.wu@gmail.com"> <img src="https://img.shields.io/badge/-Gmail-c14438?style=flat&logo=Gmail&logoColor=white" /></p></a>
-</p>
 
 
 ###### tags: `Android` `ROM` `編譯` `第三方` `教學`

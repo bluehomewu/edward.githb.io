@@ -43,13 +43,13 @@ sudo apt install bc bison build-essential ccache curl flex g++-multilib gcc-mult
 sudo apt install bc bison build-essential ccache curl flex g++-multilib gcc-multilib git gnupg gperf imagemagick lib32ncurses5-dev lib32readline-dev lib32z1-dev liblz4-tool libncurses5 libncurses5-dev libsdl1.2-dev libssl-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc zip zlib1g-dev openjdk-11-jdk git vim
 ```
 
-配置git
+設定 git
 ```
 git config --global user.email "您的e-mail"
 git config --global user.name "您的名字"
 ```
 
-同步 Recovery 源代碼
+同步 Recovery 原始碼
 ---
 #### 參考各個 Android Custom Recovery 的編譯 Manifest
 ##### 本文皆以 Orange Fox Recovery Project 與 ASUS ZenFone 4 Max (X00I)進行舉例
@@ -65,12 +65,12 @@ repo init -u https://gitlab.com/OrangeFox/Manifest.git -b fox_9.0
 ```
 repo sync -j8 --force-sync
 ```
-#### 更新源代碼
-- 在這之後如果有需要更新源代碼，請使用 repo sync 進行同步（更新代碼）
+#### 更新原始碼
+- 在這之後如果有需要更新原始碼，請使用 repo sync 進行同步（更新 Recovery 原始碼）
 ```
 repo sync
 ```
-- 待源代碼同步完成之後，還需要配置 TWRP Device Tree
+- 待原始碼同步完成之後，還需要配置 TWRP Device Tree
 
 同步 TWRP Device Tree
 ---
@@ -205,6 +205,7 @@ lunch omni_X00I-eng && mka recoveryimage
 ## 聯絡我
 - Telegram：[Edward Wu](https://t.me/edwardwu0223)
 - 行有餘力的話，可以考慮捐款給我
+[Paypal](https://www.paypal.me/edwardwu0223)
 - 同場加映
 [Android 第三方 ROM 繁體中文編譯教學](https://hackmd.io/@EdwardWu/CompileAndroidCustomROM)
 <p align="center">
